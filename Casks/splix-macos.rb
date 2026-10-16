@@ -1,6 +1,6 @@
 cask "splix-macos" do
-  version "2.0.1-macos2"
-  sha256 "0c10ce845270ba1ba4ad921a5bd899c7e08452c76b8bc67f6cf153a5aea15ffc"
+  version "2.0.1-macos3"
+  sha256 "a9ace162fca5a4175b5bdc57bfc4ac97bdf34e1ebd6732ec6e1e31af32270e74"
 
   url "https://github.com/boredjar-com/splix-macos/releases/download/v#{version}/SpliX-macOS-#{version}.pkg"
   name "SpliX for macOS"
