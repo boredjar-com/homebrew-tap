@@ -4,7 +4,7 @@ cask "splix-macos" do
 
   url "https://github.com/boredjar-com/splix-macos/releases/download/v#{version}/SpliX-macOS-#{version}.pkg"
   name "SpliX for macOS"
-  desc "Samsung, Xerox and Dell SPL/QPDL laser printer driver (SpliX), native Apple Silicon build"
+  desc "Samsung, Xerox and Dell SPL/QPDL laser printer driver (SpliX)"
   homepage "https://github.com/boredjar-com/splix-macos"
 
   livecheck do
