@@ -4,7 +4,7 @@ cask "splix-macos" do
 
   url "https://github.com/boredjar-com/splix-macos/releases/download/v#{version}/SpliX-macOS-#{version}.pkg"
   name "SpliX for macOS"
-  desc "Samsung, Xerox and Dell SPL/QPDL printer driver for macOS 27 on Apple Silicon"
+  desc "Samsung, Xerox and Dell SPL/QPDL laser printer driver (SpliX), native Apple Silicon build"
   homepage "https://github.com/boredjar-com/splix-macos"
 
   livecheck do
@@ -13,14 +13,17 @@ cask "splix-macos" do
     regex(/^v?(\d+(?:\.\d+)+-macos\d+)$/i)
   end
 
-  depends_on :macos
+  depends_on macos: :monterey
 
   pkg "SpliX-macOS-#{version}.pkg"
 
   uninstall script:  {
               executable: "/bin/bash",
-              args:       ["-c",
-                           "for p in /etc/cups/ppd/*.ppd; do grep -qs Printers/SpliX/rastertoqpdl \"$p\" && lpadmin -x \"$(basename \"$p\" .ppd)\"; done; true"],
+              args:       [
+                "-c",
+                "for p in /etc/cups/ppd/*.ppd; do grep -qs Printers/SpliX/rastertoqpdl \"$p\" && " \
+                "lpadmin -x \"$(basename \"$p\" .ppd)\"; done; true",
+              ],
               sudo:       true,
             },
             pkgutil: "com.boredjar.splix-macos",
