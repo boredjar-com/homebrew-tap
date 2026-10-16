@@ -10,21 +10,23 @@ cask "splix-macos" do
   livecheck do
     url :url
     strategy :github_latest
+    regex(/^v?(\d+(?:\.\d+)+-macos\d+)$/i)
   end
 
-  depends_on macos: ">= :monterey"
+  depends_on :macos
 
   pkg "SpliX-macOS-#{version}.pkg"
 
-  uninstall pkgutil: "com.boredjar.splix-macos",
-            script:  {
+  uninstall script:  {
               executable: "/bin/bash",
-              args:       ["-c", "for p in /etc/cups/ppd/*.ppd; do grep -qs Printers/SpliX/rastertoqpdl \"$p\" && lpadmin -x \"$(basename \"$p\" .ppd)\"; done; true"],
+              args:       ["-c",
+                           "for p in /etc/cups/ppd/*.ppd; do grep -qs Printers/SpliX/rastertoqpdl \"$p\" && lpadmin -x \"$(basename \"$p\" .ppd)\"; done; true"],
               sudo:       true,
             },
+            pkgutil: "com.boredjar.splix-macos",
             delete:  [
-              "/Library/Printers/SpliX",
               "/Library/Printers/PPDs/Contents/Resources/SpliX-*.ppd.gz",
+              "/Library/Printers/SpliX",
             ]
 
   caveats <<~EOS
